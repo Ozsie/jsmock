@@ -1,0 +1,23 @@
+{
+  "name": "jsmock",
+  "version": "1.0.0",
+  "description": "js mocking",
+  "main": "index.js",
+  "author": "Oscar Djupfeldt",
+  "license": "MIT",
+  "scripts": {
+    "publish": "git tag -a v$npm_package_version -m 'tag version v$npm_package_version'",
+    "postpublish": "git push --tags",
+    "pretest": "./node_modules/.bin/eslint index.js",
+    "test": "istanbul cover -x **/src/routes/** _mocha test/** --recursive",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^2.13.1",
+    "eslint": "^4.9.0",
+    "eslint-config-google": "^0.9.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.0"
+  }
+}
