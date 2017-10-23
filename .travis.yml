@@ -3,9 +3,10 @@ node_js:
   - "node"
   - "7"
 install:
-  - "npm install"
+  - "npm install yarn"
+  - "yarn install"
 test:
-  - "npm test"
+  - "yarn test"
 branches:
   only:
     - "master"
