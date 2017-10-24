@@ -1,11 +1,11 @@
-var chai = require('chai');
-var expect = chai.expect; // we are using the "expect" style of Chai
-var { when } = require('../index.js')();
+const chai = require('chai');
+const expect = chai.expect; // we are using the "expect" style of Chai
+const { when } = require('../index.js')();
 
 describe('jsMock', function() {
   var mocks = {};
 
-  var obj = {
+  const obj = {
     testFunction: function(a, b, c) {
       console.log(a + ' ' + b + ' ' + c);
     },
@@ -17,9 +17,9 @@ describe('jsMock', function() {
     }
   };
 
-  var mockTestFunction = function(a, b, c) { console.log(c + ' ' + b + ' ' + a) };
-  var mockReturnValue = 10;
-  var mockError = new Error('MOCK');
+  const mockTestFunction = function(a, b, c) { console.log(c + ' ' + b + ' ' + a) };
+  const mockReturnValue = 10;
+  const mockError = new Error('MOCK');
 
   before(function() {
     mocks.mock = when(obj).testFunction('apa', 'banan', 'kanin').then.call(mockTestFunction);
