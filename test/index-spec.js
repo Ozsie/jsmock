@@ -3,7 +3,6 @@ var expect = chai.expect; // we are using the "expect" style of Chai
 var { when } = require('../index.js')();
 
 describe('jsMock', function() {
-
   var mocks = {};
 
   var obj = {
@@ -49,5 +48,4 @@ describe('jsMock', function() {
     expect(mocks.mock.done.toString()).to.equal(mocks.mock4.done.toString());
     expect(mocks.mock.backup.toString()).to.equal(mocks.mock4.backup.toString())
   });
-
 });
