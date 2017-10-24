@@ -6,8 +6,6 @@ describe('jsMock', function() {
 
   var mocks = {};
 
-  console.log(mocks.apa);
-
   var obj = {
     testFunction: function(a, b, c) {
       console.log(a + ' ' + b + ' ' + c);
@@ -25,7 +23,6 @@ describe('jsMock', function() {
   var mockError = new Error('MOCK');
 
   before(function() {
-  console.log(mocks.apa);
     mocks.mock = when(obj).testFunction('apa', 'banan', 'kanin').then.call(mockTestFunction);
     mocks.mock2 = when(obj).testFunction2().then.return(mockReturnValue);
     mocks.mock3 = when(obj).testFunction3().then.throw(mockError);
@@ -41,6 +38,16 @@ describe('jsMock', function() {
     expect(obj.testFunction.toString()).to.equal(mockTestFunction.toString());
     expect(obj.testFunction2()).to.equal(mockReturnValue);
     expect(obj.testFunction3.bind()).to.throw(mockError);
+  });
+
+  it('passing non function to then.call should throw an error', function() {
+    expect(when(obj).testFunction().then.call.bind(null, mockReturnValue)).to.throw();
+  });
+
+  it('replacing mock should result in the same restore function', function() {
+    mocks.mock4 = when(obj).testFunction().then.return(mockReturnValue);
+    expect(mocks.mock.done.toString()).to.equal(mocks.mock4.done.toString());
+    expect(mocks.mock.backup.toString()).to.equal(mocks.mock4.backup.toString())
   });
 
 });

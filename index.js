@@ -1,4 +1,5 @@
 module.exports = function() {
+  var restores = {};
   var r = function(toMock, functionName) {
     var restore = {
       backup: toMock[functionName],
@@ -12,9 +13,11 @@ module.exports = function() {
       then: {
         call: function(func) {
           if (typeof func === 'function') {
-            var restore = r(toMock, functionName);
+            var key = `${toMock.constructor.name}.${functionName}`;
+            if (restores[key]) { restores[key].done(); }
+            restores[key] = r(toMock, functionName);
             toMock[functionName] = func;
-            return restore;
+            return restores[key];
           } else {
             throw new Error('then.call() must take a function as argument');
           }
